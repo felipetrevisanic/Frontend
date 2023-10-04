@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardPergunta, CardOpcao, BotaoOpcao, BlocoOpcao } from './style.js'
 import { BotaoStyle } from '../Botao/style.js';
+import ax from '../../service/axios.js';
 
-const Quiz = () => {
+const Quiz = ({pergunta, opcaoA, opcaoB, opcaoC, opcaoD}) => {
     
     const [opcaoSelecionada, setOpcaoSelecionada] = useState()
     const [confirmacao,setConfirmacao] = useState(false)
@@ -11,54 +12,56 @@ const Quiz = () => {
     const handleOptionClick = opcao => {
         if(!confirmacao){
             setOpcaoSelecionada(opcao)
+            console.log(opcaoSelecionada)
         }
     }
 
     const handleConfirmClick = () => {
         if (opcaoSelecionada !== null) {
           setConfirmacao(true);
-          // Aqui você pode fazer a validação da resposta
+          console.log(`esta ${opcaoSelecionada} foi a opcao selecionada`)
         }
       };
+
     
 
     return (
         <div>
             <CardPergunta>
-                O que é herança?
+                {pergunta}
             </CardPergunta>
             <BlocoOpcao>
                 <BotaoOpcao value={'a'}  onClick={() => handleOptionClick('a')}>A</BotaoOpcao>
                 <CardOpcao>
-                    é uma descrição de um objeto, enquanto um objeto é uma instância de uma classe.
+                {opcaoA}
                 </CardOpcao>
 
             </BlocoOpcao>
             <BlocoOpcao>
                 <BotaoOpcao value={'b'}  onClick={() => handleOptionClick('b')}>B</BotaoOpcao>
                 <CardOpcao>
-                    é um princípio de POO que oculta as informações de implementação de um objeto de seus usuários.
+                    {opcaoB}
                 </CardOpcao>
 
             </BlocoOpcao>
             <BlocoOpcao>
                 <BotaoOpcao value={'c'}  onClick={() => handleOptionClick('c')}>C</BotaoOpcao>
                 <CardOpcao>
-                    é um princípio de POO que permite que uma classe herde as propriedades e comportamentos de outra classe
+                    {opcaoC}
                 </CardOpcao>
             </BlocoOpcao>
             <BlocoOpcao>
                 <BotaoOpcao value={'d'}  onClick={() => handleOptionClick('d')}>D</BotaoOpcao>
                 <CardOpcao>
-                    A herança é um princípio de POO que permite que uma classe herde as classes e comportamentos de outra propriedade.
+                    {opcaoD}
                 </CardOpcao>
             </BlocoOpcao>
-            <BlocoOpcao>
+            {/* <BlocoOpcao>
                 <BotaoOpcao value={'e'}  onClick={() => handleOptionClick('e')}>E</BotaoOpcao>
                 <CardOpcao>
                     é uma descrição de uma classe
                 </CardOpcao>
-            </BlocoOpcao>
+            </BlocoOpcao> */}
         </div>
     );
 }
